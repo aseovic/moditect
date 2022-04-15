@@ -22,7 +22,7 @@ import static org.objectweb.asm.Opcodes.ACC_OPEN;
 import static org.objectweb.asm.Opcodes.ACC_STATIC_PHASE;
 import static org.objectweb.asm.Opcodes.ACC_SYNTHETIC;
 import static org.objectweb.asm.Opcodes.ACC_TRANSITIVE;
-import static org.objectweb.asm.Opcodes.V9;
+import static org.objectweb.asm.Opcodes.V11;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -47,7 +47,7 @@ import com.github.javaparser.ast.modules.ModuleUsesDirective;
 public class ModuleInfoCompiler {
 
     static {
-        StaticJavaParser.getConfiguration().setLanguageLevel(JAVA_9 );
+        StaticJavaParser.getConfiguration().setLanguageLevel(JAVA_11);
     }
 
     public static ModuleDeclaration parseModuleInfo(Path moduleInfo) {
@@ -73,7 +73,7 @@ public class ModuleInfoCompiler {
 
     public static byte[] compileModuleInfo(ModuleDeclaration module, String mainClass, String version) {
         ClassWriter classWriter = new ClassWriter( 0 );
-        classWriter.visit( V9, ACC_MODULE, "module-info", null, null, null );
+        classWriter.visit( V11, ACC_MODULE, "module-info", null, null, null );
 
         int moduleAccess = module.isOpen() ? ACC_SYNTHETIC | ACC_OPEN : ACC_SYNTHETIC;
         ModuleVisitor mv = classWriter.visitModule( module.getNameAsString(), moduleAccess, version );

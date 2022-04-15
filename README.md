@@ -49,7 +49,7 @@ _generate-module-info_ goal as follows:
 ```xml
 ...
 <plugin>
-    <groupId>org.moditect</groupId>
+    <groupId>com.oracle.coherence.moditect</groupId>
     <artifactId>moditect-maven-plugin</artifactId>
     <version>1.0.0.CR1</version>
     <executions>
@@ -198,7 +198,7 @@ the _add-module-info_ goal as follows:
 ```xml
 ...
 <plugin>
-    <groupId>org.moditect</groupId>
+    <groupId>com.oracle.coherence.moditect</groupId>
     <artifactId>moditect-maven-plugin</artifactId>
     <version>1.0.0.Beta2</version>
     <executions>
@@ -259,7 +259,7 @@ _add-module-info_ goal as follows:
 ```xml
 ...
 <plugin>
-    <groupId>org.moditect</groupId>
+    <groupId>com.oracle.coherence.moditect</groupId>
     <artifactId>moditect-maven-plugin</artifactId>
     <version>1.0.0.Beta2</version>
     <executions>
@@ -328,7 +328,7 @@ _create-runtime-image_ goal as follows:
 ```xml
 ...
 <plugin>
-    <groupId>org.moditect</groupId>
+    <groupId>com.oracle.coherence.moditect</groupId>
     <artifactId>moditect-maven-plugin</artifactId>
     <version>1.0.0.Beta2</version>
     <executions>
