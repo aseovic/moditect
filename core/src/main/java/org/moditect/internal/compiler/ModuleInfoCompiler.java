@@ -27,10 +27,13 @@ import static org.objectweb.asm.Opcodes.V11;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.nodeTypes.NodeWithModifiers;
+import java.util.Set;
+import java.util.TreeSet;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.ModuleVisitor;
 
@@ -82,7 +85,15 @@ public class ModuleInfoCompiler {
             mv.visitMainClass( getNameForBinary( mainClass ) );
         }
 
-        for ( ModuleRequiresDirective requires : module.findAll( ModuleRequiresDirective.class ) ) {
+        Set<ModuleRequiresDirective> setRequires = new TreeSet<>((r1, r2) -> {
+            int nMod1 = requiresModifiersAsInt( r1 );
+            int nMod2 = requiresModifiersAsInt( r2 );
+
+            return nMod1 == nMod2 ? r1.getNameAsString().compareTo(r2.getNameAsString()) : nMod1 - nMod2;
+        });
+        setRequires.addAll(module.findAll( ModuleRequiresDirective.class ));
+
+        for ( ModuleRequiresDirective requires : setRequires ) {
             mv.visitRequire(
                 requires.getName().asString(),
                 requiresModifiersAsInt( requires ),
@@ -90,7 +101,9 @@ public class ModuleInfoCompiler {
             );
         }
 
-        for ( ModuleExportsDirective export : module.findAll( ModuleExportsDirective.class ) ) {
+        Set<ModuleExportsDirective> setExports = new TreeSet<>( Comparator.comparing( e -> getNameForBinary( e.getNameAsString() ) ) );
+        setExports.addAll( module.findAll( ModuleExportsDirective.class ) );
+        for ( ModuleExportsDirective export : setExports ) {
             mv.visitExport(
                     getNameForBinary( export.getNameAsString() ),
                     0,
@@ -101,7 +114,9 @@ public class ModuleInfoCompiler {
             );
         }
 
-        for ( ModuleProvidesDirective provides : module.findAll( ModuleProvidesDirective.class ) ) {
+        Set<ModuleProvidesDirective> setProvides = new TreeSet<>( Comparator.comparing( p -> getNameForBinary( p.getName() ) ) );
+        setProvides.addAll( module.findAll( ModuleProvidesDirective.class ) );
+        for ( ModuleProvidesDirective provides : setProvides ) {
             mv.visitProvide(
                 getNameForBinary( provides.getName() ),
                 provides.getWith()
@@ -111,11 +126,15 @@ public class ModuleInfoCompiler {
             );
         }
 
-        for ( ModuleUsesDirective uses : module.findAll( ModuleUsesDirective.class ) ) {
+        Set<ModuleUsesDirective> setUses = new TreeSet<>( Comparator.comparing( u -> getNameForBinary( u.getName() ) ) );
+        setUses.addAll( module.findAll( ModuleUsesDirective.class ) );
+        for ( ModuleUsesDirective uses : setUses ) {
             mv.visitUse( getNameForBinary( uses.getName() ) );
         }
 
-        for ( ModuleOpensDirective opens : module.findAll( ModuleOpensDirective.class ) ) {
+        Set<ModuleOpensDirective> setOpens = new TreeSet<>( Comparator.comparing( o -> getNameForBinary( o.getNameAsString() ) ) );
+        setOpens.addAll( module.findAll( ModuleOpensDirective.class ) );
+        for ( ModuleOpensDirective opens : setOpens ) {
             mv.visitOpen(
                     getNameForBinary( opens.getNameAsString() ),
                     0,
