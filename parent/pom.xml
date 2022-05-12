@@ -30,7 +30,7 @@
 
     <groupId>com.oracle.coherence.moditect</groupId>
     <artifactId>moditect-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RC1</version>
     <packaging>pom</packaging>
 
     <name>ModiTect Parent</name>
