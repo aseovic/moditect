@@ -45,6 +45,8 @@
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <version.nexus.plugin>1.6.13</version.nexus.plugin>
     </properties>
 
     <scm>
