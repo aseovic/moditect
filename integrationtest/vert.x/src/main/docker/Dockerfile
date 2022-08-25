@@ -16,4 +16,4 @@
 
 FROM moditect/vertx-helloworld-base
 
-COPY maven/moditect-integrationtest-vertx-1.0.0-RC1.jar /opt/upgrade-modules/
+COPY maven/moditect-integrationtest-vertx-1.0.0-RC2.jar /opt/upgrade-modules/
