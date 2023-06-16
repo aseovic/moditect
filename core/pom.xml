@@ -22,7 +22,7 @@
     <parent>
         <groupId>com.oracle.coherence.moditect</groupId>
         <artifactId>moditect-parent</artifactId>
-        <version>1.0.0-RC2</version>
+        <version>1.0.0-RC3</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm</artifactId>
-            <version>9.3</version>
+            <version>9.5</version>
         </dependency>
         <dependency>
             <groupId>com.beust</groupId>

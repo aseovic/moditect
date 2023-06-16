@@ -30,6 +30,7 @@ import org.moditect.model.Version;
 import java.io.File;
 
 @Mojo(name = "list-application-image-modules",
+		threadSafe = true,
 		defaultPhase = LifecyclePhase.PACKAGE,
 		requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME
 )

@@ -30,7 +30,7 @@
 
     <groupId>com.oracle.coherence.moditect</groupId>
     <artifactId>moditect-parent</artifactId>
-    <version>1.0.0-RC2</version>
+    <version>1.0.0-RC3</version>
     <packaging>pom</packaging>
 
     <name>ModiTect Parent</name>
@@ -42,10 +42,11 @@
         <project.identifier>moditect</project.identifier>
         <project.repository>moditect/moditect</project.repository>
         <local.repository.path>/tmp/repository</local.repository.path>
-        <java.version>11</java.version>
+        <java.version>20</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
+        <version.enforcer.plugin>3.3.0</version.enforcer.plugin>
         <version.nexus.plugin>1.6.13</version.nexus.plugin>
     </properties>
 
@@ -103,12 +104,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.6.0</version>
+                    <version>3.8.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.2.4</version>
+                    <version>3.4.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -146,6 +147,41 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-enforcer-plugin</artifactId>
+              <executions>
+                <execution>
+                  <phase>validate</phase>
+                  <goals>
+                    <goal>enforce</goal>
+                  </goals>
+                  <configuration>
+                    <rules combine.children="override">
+                      <requireMavenVersion>
+                        <version>${maven.version}</version>
+                      </requireMavenVersion>
+                      <requireJavaVersion>
+                        <version>${java.version}</version>
+                      </requireJavaVersion>
+                      <enforceBytecodeVersion>
+                        <maxJdkVersion>${java.version}</maxJdkVersion>
+                      </enforceBytecodeVersion>
+                      <dependencyConvergence/>
+                      <requireUpperBoundDeps/>
+                    </rules>
+                  </configuration>
+                </execution>
+              </executions>
+              <dependencies>
+                <dependency>
+                  <groupId>org.codehaus.mojo</groupId>
+                  <artifactId>extra-enforcer-rules</artifactId>
+                  <version>1.6.2</version>
+                </dependency>
+              </dependencies>
+            </plugin>
+
         </plugins>
     </build>
 

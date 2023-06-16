@@ -47,6 +47,7 @@ import org.moditect.model.JarInclusionPolicy;
  * @author Gunnar Morling
  */
 @Mojo(name = "create-runtime-image",
+      threadSafe = true,
       defaultPhase = LifecyclePhase.PACKAGE,
       requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME)
 public class CreateRuntimeImageMojo extends AbstractMojo {
